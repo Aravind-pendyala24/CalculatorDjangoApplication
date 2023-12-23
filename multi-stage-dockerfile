@@ -1,0 +1,19 @@
+FROM centos:latest AS Build
+
+WORKDIR /project
+
+COPY calculator /project
+COPY req.txt /project
+
+#multi stage docker build
+
+FROM python:3
+
+COPY --from=Build /project /project
+
+RUN pip install -r req.txt && \
+    cd project/calculator
+
+ENTRYPOINT ["python3"]
+
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]
