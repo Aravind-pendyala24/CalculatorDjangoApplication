@@ -8,7 +8,7 @@ COPY req.txt /project
 RUN yum update -y && \
     yum install python3 python3-pip -y && \
     pip install -r req.txt && \
-    cd project/calculator
+    cd project
 
 
 
