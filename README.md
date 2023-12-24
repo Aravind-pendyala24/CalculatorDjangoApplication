@@ -1,4 +1,4 @@
-# Containerizing CalculatorDjango Application with Docker and Reduce Image Size by Multi Size Docker Builds.
+# Containerizing CalculatorDjango Application with Docker and Reduce Image Size by Multi Stage Docker Builds.
 
 - Steps to Containerize CalculatorDjango Application with a CentOS base Image
   
