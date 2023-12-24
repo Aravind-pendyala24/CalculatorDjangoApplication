@@ -3,16 +3,17 @@ FROM centos:latest AS Build
 WORKDIR /project
 
 COPY calculator /project
-COPY req.txt /project
+COPY requirements.txt /project
 
 #multi stage docker build
 
-FROM python:3
+FROM python:3.8-slim
 
 COPY --from=Build /project /project
 
-RUN pip install -r req.txt && \
-    cd project
+WORKDIR /project
+
+RUN pip install -r requirements.txt
 
 ENTRYPOINT ["python3"]
 
