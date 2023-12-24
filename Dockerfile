@@ -1,13 +1,17 @@
-FROM centos:latest 
+FROM centos:latest
 
 WORKDIR /project
 
 COPY calculator /project
 COPY req.txt /project
 
-RUN yum update -y && \
+RUN cd /etc/yum.repos.d/ && \
+    sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
+    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-* && \
+    yum update -y && \
+    yum install epel-release -y && \
     yum install python3 python3-pip -y && \
-    pip install -r req.txt && \
+    pip3 install -r req.txt && \
     cd project
 
 
@@ -16,5 +20,3 @@ RUN yum update -y && \
 ENTRYPOINT ["python3"]
 
 CMD ["manage.py", "runserver", "0.0.0.0:8000"]
-
-
